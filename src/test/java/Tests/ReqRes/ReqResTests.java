@@ -4,8 +4,7 @@ import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static Common.RequestBuilder.*;
-import static Common.TestData.Creation_Success;
-import static Common.TestData.Update_Success;
+import static Common.TestData.*;
 
 @Test
 @Feature("Req Res")
@@ -29,6 +28,16 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Update_Success);
+    }
+
+
+    @Description("As an api user i want to change job title to the employee")
+    @Severity(SeverityLevel.CRITICAL)
+    public void partialUpdateEmployeeTests() {
+        partialUpdateEmployeeResponse().
+                then().
+                assertThat().
+                statusCode(PartialUpdate_Success);
     }
 
 }
