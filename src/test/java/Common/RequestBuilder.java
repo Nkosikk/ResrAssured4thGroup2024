@@ -54,4 +54,16 @@ public class RequestBuilder {
     }
 
 
+    public static Response deleteEmployeeResponse() {
+        return  given().
+                when().
+                contentType(contentType).
+                log().all().
+                delete(ReqRes_BaseURL+"/api/users/"+userID).
+                then().
+                log().all().
+                extract().response();
+    }
+
+
 }
