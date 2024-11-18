@@ -14,7 +14,6 @@ public class ReqResTests {
 
     @Description("As an api user i want to create the new employee")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(priority = 1)
     public void CreateUserTests() {
         createUserResponse().
                 then().
@@ -24,29 +23,29 @@ public class ReqResTests {
 
     @Description("As an api user i want to add an address to the employee")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "CreateUserTests" )
     public void UpdateEmployeeTests() {
         updateEmployeeResponse().
                 then().
                 assertThat().
-                statusCode(Update_Success);
+                statusCode(Success_Status);
     }
 
 
     @Description("As an api user i want to change job title to the employee")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "UpdateEmployeeTests" )
     public void PartialUpdateEmployeeTests() {
         partialUpdateEmployeeResponse().
                 then().
                 assertThat().
-                statusCode(PartialUpdate_Success);
+                statusCode(Success_Status);
     }
 
 
     @Description("As an api user i want to delete the employee")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(priority = 4)
+    @Test(dependsOnMethods = {"CreateUserTests","UpdateEmployeeTests","PartialUpdateEmployeeTests"})
     public void DeleteEmployeeTests() {
         deleteEmployeeResponse().
                 then().
