@@ -3,8 +3,12 @@ package Tests.ReqRes;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+import static Common.GenerateTestData.firstName;
+import static Common.GenerateTestData.jobTime;
 import static Common.RequestBuilder.*;
-import static Common.TestData.*;
+import static Common.CommonTestData.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.notNullValue;
 
 @Test
 @Feature("Req Res")
@@ -18,7 +22,11 @@ public class ReqResTests {
         createUserResponse().
                 then().
                 assertThat().
-                statusCode(Creation_Success);
+                statusCode(Creation_Success).
+                body("name",containsString(firstName)).
+                body("job",containsString(jobTime)).
+                body("id",notNullValue()).
+                body("createdAt",notNullValue());
     }
 
     @Description("As an api user i want to add an address to the employee")

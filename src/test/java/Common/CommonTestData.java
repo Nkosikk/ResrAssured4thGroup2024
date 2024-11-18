@@ -1,6 +1,6 @@
 package Common;
 
-public class TestData {
+public class CommonTestData {
 
     public static int Creation_Success = 201;
     public static int Success_Status = 200;

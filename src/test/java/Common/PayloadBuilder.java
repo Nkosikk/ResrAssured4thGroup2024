@@ -1,15 +1,18 @@
 package Common;
 
 import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
+
+import static Common.GenerateTestData.*;
+
+
 
 public class PayloadBuilder {
 
     public static JSONObject createEmployeeObject() {
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", "Cele");
-        jsonObject.put("job", "Tester");
+        jsonObject.put("name",firstName);
+        jsonObject.put("job", jobTime);
 
         return jsonObject;
     }
