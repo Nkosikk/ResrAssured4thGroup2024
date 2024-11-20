@@ -14,8 +14,16 @@ public class GenerateTestData {
     public static String externalID = generateExternalID(cityName);
     public static String latitude = faker.address().latitude();
     public static String longitude = faker.address().longitude();
+    public static int stationNumber = generateRandomNumber();
 
     public static String altitude = generateRandomAltitude();
+
+
+    public static int generateRandomNumber() {
+
+        return faker.number().numberBetween(111, 999);
+
+    }
 
     private static String generateExternalID(String cityName) {
         String[] words = cityName.split(" ");
@@ -26,7 +34,7 @@ public class GenerateTestData {
             }
         }
 
-        return firstLetters.toString().toUpperCase() + "_TEST" + String.format("%03d", increment++);
+        return firstLetters.toString().toUpperCase() + "_TEST" + String.valueOf(generateRandomNumber());
 
     }
     private static String generateRandomAltitude() {
@@ -34,4 +42,8 @@ public class GenerateTestData {
         int randomAltitude = faker.number().numberBetween(-500, 8001);
         return String.valueOf(randomAltitude);
     }
+
+
+
+
 }

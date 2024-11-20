@@ -60,8 +60,5 @@ public class ReqResTests {
                 statusCode(delete_Success);
     }
 
-    @Test
-    public void display(){
-        System.out.println(externalID);
-    }
+
 }
