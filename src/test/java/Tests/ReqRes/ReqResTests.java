@@ -3,8 +3,7 @@ package Tests.ReqRes;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-import static Common.GenerateTestData.firstName;
-import static Common.GenerateTestData.jobTime;
+import static Common.GenerateTestData.*;
 import static Common.RequestBuilder.*;
 import static Common.CommonTestData.*;
 import static org.hamcrest.Matchers.containsString;
@@ -61,4 +60,8 @@ public class ReqResTests {
                 statusCode(delete_Success);
     }
 
+    @Test
+    public void display(){
+        System.out.println(externalID);
+    }
 }
