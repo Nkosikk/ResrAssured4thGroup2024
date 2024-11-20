@@ -3,6 +3,7 @@ package Common;
 import io.restassured.response.Response;
 
 import static Common.BasePaths.ReqRes_BaseURL;
+import static Common.BasePaths.WeatherStation_BaseURL;
 import static Common.ContentType.contentType;
 import static Common.PayloadBuilder.*;
 import static io.restassured.RestAssured.given;
@@ -10,6 +11,7 @@ import static io.restassured.RestAssured.given;
 public class RequestBuilder {
 
     public static String userID;
+    public static String stationID;
 
     public static Response createUserResponse() {
         Response response= given().
@@ -63,6 +65,20 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+    }
+    public static Response createWeatherStationResponse() {
+        Response response =  given().
+                when().
+                body(createWeatherStationObject()).
+                contentType(contentType).
+                log().all().
+                post(WeatherStation_BaseURL+"/data/3.0/stations").
+                then().
+                log().all().
+                extract().response();
+        stationID =response.jsonPath().getString("external_id");
+
+        return response;
     }
 
 

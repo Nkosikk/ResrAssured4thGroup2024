@@ -1,7 +1,7 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
-!**/src/Tests.Weather.test/**/target/
+!**/src/Tests.Weather.weatherTest/**/target/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -31,7 +31,7 @@ test-output/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
-!**/src/Tests.Weather.test/**/build/
+!**/src/Tests.Weather.weatherTest/**/build/
 
 ### VS Code ###
 .vscode/

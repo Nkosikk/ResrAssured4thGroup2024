@@ -36,5 +36,16 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
+    public static JSONObject createWeatherStationObject() {
 
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("external_id",externalID);
+        jsonObject.put("name",stationName);
+        jsonObject.put("latitude",latitude);
+        jsonObject.put("longitude",longitude);
+        jsonObject.put("altitude",altitude);
+
+
+        return jsonObject;
+    }
 }
