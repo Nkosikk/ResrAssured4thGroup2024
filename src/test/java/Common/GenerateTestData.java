@@ -1,22 +1,22 @@
 package Common;
 
 import com.github.javafaker.Faker;
-import org.testng.annotations.Test;
 
 public class GenerateTestData {
     static Faker faker = new Faker();
-    private static int increment = 1;
 
     public static String firstName = faker.name().firstName();
     public static String jobTime = faker.job().position();
     public static String cityName = faker.address().cityName();
     public static String stationName = cityName + " Test Station";
     public static String externalID = generateExternalID(cityName);
-    public static String latitude = faker.address().latitude();
-    public static String longitude = faker.address().longitude();
-    public static int stationNumber = generateRandomNumber();
+    private static final String latitudeStr = faker.address().latitude().replace(",", ".");
+    public static float latitude = Float.parseFloat(latitudeStr);
 
-    public static String altitude = generateRandomAltitude();
+    private static final String longitudeStr = faker.address().latitude().replace(",", ".");
+    public static float longitude = Float.parseFloat(longitudeStr);
+
+    public static int altitude = generateRandomAltitude();
 
 
     public static int generateRandomNumber() {
@@ -34,13 +34,12 @@ public class GenerateTestData {
             }
         }
 
-        return firstLetters.toString().toUpperCase() + "_TEST" + String.valueOf(generateRandomNumber());
+        return firstLetters.toString().toUpperCase() + "_TEST" + (generateRandomNumber());
 
     }
-    private static String generateRandomAltitude() {
+    private static int generateRandomAltitude() {
 
-        int randomAltitude = faker.number().numberBetween(-500, 8001);
-        return String.valueOf(randomAltitude);
+        return (faker.number().numberBetween(-500, 8001));
     }
 
 

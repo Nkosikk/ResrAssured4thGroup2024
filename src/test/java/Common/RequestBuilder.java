@@ -6,6 +6,7 @@ import static Common.BasePaths.ReqRes_BaseURL;
 import static Common.BasePaths.WeatherStation_BaseURL;
 import static Common.ContentType.contentType;
 import static Common.PayloadBuilder.*;
+import static Common.QueryParameters.apiKey;
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
@@ -68,6 +69,7 @@ public class RequestBuilder {
     }
     public static Response createWeatherStationResponse() {
         Response response =  given().
+                queryParam("appid", apiKey).
                 when().
                 body(createWeatherStationObject()).
                 contentType(contentType).
