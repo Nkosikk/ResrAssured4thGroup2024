@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import static Common.BasePaths.ReqRes_BaseURL;
 import static Common.BasePaths.WeatherStation_BaseURL;
 import static Common.ContentType.contentType;
+import static Common.GenerateTestData.*;
 import static Common.PayloadBuilder.*;
 import static Common.QueryParameters.apiKey;
 import static io.restassured.RestAssured.given;
@@ -67,11 +68,11 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    public static Response createWeatherStationResponse() {
+    public static Response weatherStationResponse(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) {
         Response response =  given().
                 queryParam("appid", apiKey).
                 when().
-                body(createWeatherStationObject()).
+                body(weatherStationObject(vExternalID,vStationName,vLatitude,vLongitude,vAltitude)).
                 contentType(contentType).
                 log().all().
                 post(WeatherStation_BaseURL+"/data/3.0/stations").
