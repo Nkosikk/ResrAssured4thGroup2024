@@ -36,14 +36,14 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
-    public static JSONObject createWeatherStationObject() {
+    public static JSONObject weatherStationObject(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) {
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("external_id",externalID);
-        jsonObject.put("name",stationName);
-        jsonObject.put("latitude",latitude);
-        jsonObject.put("longitude",longitude);
-        jsonObject.put("altitude",altitude);
+        jsonObject.put("external_id",vExternalID);
+        jsonObject.put("name",vStationName);
+        jsonObject.put("latitude",vLatitude);
+        jsonObject.put("longitude",vLongitude);
+        jsonObject.put("altitude",vAltitude);
 
 
         return jsonObject;
