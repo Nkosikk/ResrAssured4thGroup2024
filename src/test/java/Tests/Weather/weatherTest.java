@@ -4,8 +4,7 @@ import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.Creation_Success;
-import static Common.GenerateTestData.firstName;
-import static Common.GenerateTestData.jobTime;
+import static Common.GenerateTestData.*;
 import static Common.RequestBuilder.createUserResponse;
 import static Common.RequestBuilder.createWeatherStationResponse;
 import static org.hamcrest.Matchers.containsString;
@@ -27,4 +26,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
         }
 
+        @Test
+        public void Display(){
+            System.out.println(longitude);
+        }
 }
