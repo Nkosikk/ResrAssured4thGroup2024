@@ -1,12 +1,15 @@
 package Tests.Weather;
 
 import io.qameta.allure.*;
+import org.apache.commons.lang3.ObjectUtils;
 import org.testng.annotations.Test;
 
-import static Common.CommonTestData.Creation_Success;
-import static Common.CommonTestData.badRequest;
+import javax.lang.model.type.NullType;
+
+import static Common.CommonTestData.*;
 import static Common.GenerateTestData.*;
 import static Common.RequestBuilder.*;
+import static java.lang.Float.NaN;
 import static org.hamcrest.Matchers.*;
 
 @Test
@@ -15,10 +18,11 @@ import static org.hamcrest.Matchers.*;
 public class weatherTest {
 
 
+
     @Description("As an api user i want to create the new weather station")
     @Severity(SeverityLevel.BLOCKER)
     public void CreateWeatherStationTests() {
-        weatherStationResponse(externalID, stationName, latitude, longitude, altitude).
+        weatherStationResponse(externalID, stationName, latitude,longitude, altitude).
                 then().
                 assertThat().
                 statusCode(Creation_Success);
@@ -41,9 +45,35 @@ public class weatherTest {
     @Description("As an api user i want to test the creation of the new weather station without providing latitude value")
     @Severity(SeverityLevel.BLOCKER)
     public void CreateWeatherStationWithEmptyLatitudeTests() {
-        Float lat = 0.0F;
+        //Float lat = 3.0F;
 
-        weatherStationResponse(externalID, stationName, lat, longitude, altitude).
+        weatherStationResponse(externalID,stationName,"", longitude, altitude).
+                then().
+                assertThat().
+                statusCode(badRequest).
+                body("code", notNullValue()).
+                body("message", containsString("unmarshal type error:"));
+
+
+    }
+    @Description("As an api user i want to test the creation of the new weather station without providing longitude value")
+    @Severity(SeverityLevel.BLOCKER)
+    public void CreateWeatherStationWithEmptyLongitudeTests() {
+
+        weatherStationResponse(externalID,stationName,latitude,"", altitude).
+                then().
+                assertThat().
+                statusCode(badRequest).
+                body("code", notNullValue()).
+                body("message", containsString("unmarshal type error:"));
+
+
+    }
+    @Description("As an api user i want to test the creation of the new weather station without providing Altitude value")
+    @Severity(SeverityLevel.BLOCKER)
+    public void CreateWeatherStationWithEmptyAltitudeTests() {
+
+        weatherStationResponse(externalID,stationName,latitude,longitude, altitude).
                 then().
                 assertThat().
                 statusCode(badRequest).

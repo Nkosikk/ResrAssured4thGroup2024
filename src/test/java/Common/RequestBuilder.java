@@ -68,7 +68,7 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    public static Response weatherStationResponse(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) {
+    public static Response weatherStationResponse(String vExternalID, String vStationName, String vLatitude, String vLongitude,int vAltitude) {
         Response response =  given().
                 queryParam("appid", apiKey).
                 when().
