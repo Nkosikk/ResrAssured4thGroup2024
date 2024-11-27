@@ -36,7 +36,7 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
-    public static JSONObject weatherStationObject(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) {
+    public static JSONObject weatherStationObject(String vExternalID, String vStationName, String vLatitude, String vLongitude,int vAltitude) {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("external_id",vExternalID);

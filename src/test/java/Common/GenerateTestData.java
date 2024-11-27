@@ -11,12 +11,15 @@ public class GenerateTestData {
     public static String stationName = cityName + " Test Station";
     public static String externalID = generateExternalID(cityName);
     private static final String latitudeStr = faker.address().latitude().replace(",", ".");
-    public static float latitude = Float.parseFloat(latitudeStr);
+    //public static Float latitude = Float.parseFloat(latitudeStr);
+    public static String latitude = latitudeStr;
 
     private static final String longitudeStr = faker.address().latitude().replace(",", ".");
-    public static float longitude = Float.parseFloat(longitudeStr);
+   // public static float longitude = Float.parseFloat(longitudeStr);
+    public static String longitude = longitudeStr;
 
     public static int altitude = generateRandomAltitude();
+
 
 
     public static int generateRandomNumber() {
