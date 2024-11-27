@@ -1,6 +1,11 @@
 package Common;
 
 import com.github.javafaker.Faker;
+import org.testng.annotations.Test;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class GenerateTestData {
     static Faker faker = new Faker();
@@ -11,13 +16,13 @@ public class GenerateTestData {
     public static String stationName = cityName + " Test Station";
     public static String externalID = generateExternalID(cityName);
     private static final String latitudeStr = faker.address().latitude().replace(",", ".");
-    //public static Float latitude = Float.parseFloat(latitudeStr);
-    public static String latitude = latitudeStr;
+    public static Float latitude = Float.parseFloat(latitudeStr);
+//    public static String latitude = latitudeStr;
 
     public static String address = faker.address().fullAddress();
     private static final String longitudeStr = faker.address().latitude().replace(",", ".");
-   // public static float longitude = Float.parseFloat(longitudeStr);
-    public static String longitude = longitudeStr;
+    public static float longitude = Float.parseFloat(longitudeStr);
+//    public static String longitude = longitudeStr;
 
     public static int altitude = generateRandomAltitude();
 
@@ -47,6 +52,17 @@ public class GenerateTestData {
     }
 
 
+    public static String getApiKey() throws IOException {
+        // Load properties file
+        Properties properties = new Properties();
+        FileInputStream fileInputStream = new FileInputStream("src/test/resources/properties.properties");
+        properties.load(fileInputStream);
+
+        // Return the value of apiKey
+        return properties.getProperty("apiKey");
+        }
+    }
 
 
-}
+
+

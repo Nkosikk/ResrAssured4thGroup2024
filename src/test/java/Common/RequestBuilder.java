@@ -2,12 +2,13 @@ package Common;
 
 import io.restassured.response.Response;
 
+import java.io.IOException;
+
 import static Common.BasePaths.ReqRes_BaseURL;
 import static Common.BasePaths.WeatherStation_BaseURL;
 import static Common.ContentType.contentType;
 import static Common.GenerateTestData.*;
 import static Common.PayloadBuilder.*;
-import static Common.QueryParameters.apiKey;
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
@@ -68,7 +69,8 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    public static Response weatherStationResponse(String vExternalID, String vStationName, String vLatitude, String vLongitude,int vAltitude) {
+    public static Response weatherStationResponse(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) throws IOException {
+        String apiKey = getApiKey();
         Response response =  given().
                 queryParam("appid", apiKey).
                 when().
