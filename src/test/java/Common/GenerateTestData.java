@@ -14,6 +14,7 @@ public class GenerateTestData {
     //public static Float latitude = Float.parseFloat(latitudeStr);
     public static String latitude = latitudeStr;
 
+    public static String address = faker.address().fullAddress();
     private static final String longitudeStr = faker.address().latitude().replace(",", ".");
    // public static float longitude = Float.parseFloat(longitudeStr);
     public static String longitude = longitudeStr;

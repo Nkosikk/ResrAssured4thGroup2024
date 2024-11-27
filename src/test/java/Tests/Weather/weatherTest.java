@@ -82,4 +82,29 @@ public class weatherTest {
 
 
     }
+
+    @Description("As an api user i want to test the creation of the new weather station without providing External ID value")
+    @Severity(SeverityLevel.BLOCKER)
+    public void CreateWeatherStationWithEmptyAExternalIDTests() {
+
+        weatherStationResponse("",stationName,latitude,longitude, altitude).
+                then().
+                assertThat().
+                statusCode(badRequest).
+                body("code", notNullValue()).
+                body("message", equalTo("Bad external id"));
+
+
+    }
+
+    public void updateWeatherDetails(){
+        updateEmployeeResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status);
+    }
+
+
+
+
 }
