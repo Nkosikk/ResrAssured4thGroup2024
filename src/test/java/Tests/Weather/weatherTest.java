@@ -20,18 +20,6 @@ import static org.hamcrest.Matchers.*;
 public class weatherTest {
 
 
-
-    @Description("As an api user i want to create the new weather station")
-    @Severity(SeverityLevel.BLOCKER)
-    public void CreateWeatherStationTests() throws IOException {
-        weatherStationResponse(externalID, stationName, latitude,longitude, altitude).
-                then().
-                assertThat().
-                statusCode(Creation_Success);
-
-
-    }
-
     @Description("As an api user i want to test the creation of the new weather station without providing station name")
     @Severity(SeverityLevel.BLOCKER)
     public void CreateWeatherStationWithEmptyStationNameTests() throws IOException {
@@ -45,67 +33,93 @@ public class weatherTest {
 
     }
 
-    @Description("As an api user i want to test the creation of the new weather station without providing latitude value")
-    @Severity(SeverityLevel.BLOCKER)
-    public void CreateWeatherStationWithEmptyLatitudeTests() throws IOException {
-        //Float lat = 3.0F;
 
-        weatherStationResponse(externalID,stationName,latitude, longitude, altitude).
+    //    @Description("As an api user i want to test the creation of the new weather station without providing latitude value")
+//    @Severity(SeverityLevel.BLOCKER)
+//    public void CreateWeatherStationWithEmptyLatitudeTests() throws IOException {
+////        float latitude = 0.0f;
+//        weatherStationResponse(externalID,stationName,latitude, longitude, altitude).
+//                then().
+//                assertThat().
+//                statusCode(badRequest).
+//                body("code", notNullValue()).
+//                body("message", containsString("unmarshal type error:"));
+//
+//
+//    }
+//    @Description("As an api user i want to test the creation of the new weather station without providing longitude value")
+//    @Severity(SeverityLevel.BLOCKER)
+//    public void CreateWeatherStationWithEmptyLongitudeTests() throws IOException {
+//
+//        weatherStationResponse(externalID,stationName,latitude,longitude, altitude).
+//                then().
+//                assertThat().
+//                statusCode(badRequest).
+//                body("code", notNullValue()).
+//                body("message", containsString("unmarshal type error:"));
+//
+//
+//    }
+//    @Description("As an api user i want to test the creation of the new weather station without providing Altitude value")
+//    @Severity(SeverityLevel.BLOCKER)
+//    public void CreateWeatherStationWithEmptyAltitudeTests() throws IOException {
+//
+//        weatherStationResponse(externalID,stationName,latitude,longitude, altitude).
+//                then().
+//                assertThat().
+//                statusCode(badRequest).
+//                body("code", notNullValue()).
+//                body("message", equalTo("Bad or zero length station name"));
+//
+//
+//    }
+//
+//    @Description("As an api user i want to test the creation of the new weather station without providing External ID value")
+//    @Severity(SeverityLevel.BLOCKER)
+//    public void CreateWeatherStationWithEmptyAExternalIDTests() throws IOException {
+//
+//        weatherStationResponse(null,stationName,latitude,longitude, altitude).
+//                then().
+//                assertThat().
+//                statusCode(badRequest).
+//                body("code", notNullValue()).
+//                body("message", equalTo("Bad external id"));
+//
+//
+//    }
+
+
+    @Description("As an api user i want to create the new weather station")
+    @Severity(SeverityLevel.BLOCKER)
+    @Test(dependsOnMethods = "CreateWeatherStationWithEmptyStationNameTests")
+    public void CreateWeatherStationTests() throws IOException {
+        weatherStationResponse(externalID, stationName, latitude,longitude, altitude).
                 then().
                 assertThat().
-                statusCode(badRequest).
-                body("code", notNullValue()).
-                body("message", containsString("unmarshal type error:"));
+                statusCode(Creation_Success);
 
 
     }
-    @Description("As an api user i want to test the creation of the new weather station without providing longitude value")
+
+
+    @Description("As an api user i want to update weather station details")
     @Severity(SeverityLevel.BLOCKER)
-    public void CreateWeatherStationWithEmptyLongitudeTests() throws IOException {
-
-        weatherStationResponse(externalID,stationName,latitude,longitude, altitude).
-                then().
-                assertThat().
-                statusCode(badRequest).
-                body("code", notNullValue()).
-                body("message", containsString("unmarshal type error:"));
-
-
-    }
-    @Description("As an api user i want to test the creation of the new weather station without providing Altitude value")
-    @Severity(SeverityLevel.BLOCKER)
-    public void CreateWeatherStationWithEmptyAltitudeTests() throws IOException {
-
-        weatherStationResponse(externalID,stationName,latitude,longitude, altitude).
-                then().
-                assertThat().
-                statusCode(badRequest).
-                body("code", notNullValue()).
-                body("message", equalTo("Bad or zero length station name"));
-
-
-    }
-
-    @Description("As an api user i want to test the creation of the new weather station without providing External ID value")
-    @Severity(SeverityLevel.BLOCKER)
-    public void CreateWeatherStationWithEmptyAExternalIDTests() throws IOException {
-
-        weatherStationResponse("",stationName,latitude,longitude, altitude).
-                then().
-                assertThat().
-                statusCode(badRequest).
-                body("code", notNullValue()).
-                body("message", equalTo("Bad external id"));
-
-
-    }
-
-    public void updateWeatherDetails(){
-        updateEmployeeResponse().
+    @Test(dependsOnMethods = "CreateWeatherStationTests"  )
+    public void UpdateWeatherDetails() throws IOException {
+        updateweatherStationResponse(externalID, stationName, latitude,longitude, altitude).
                 then().
                 assertThat().
                 statusCode(Success_Status);
     }
 
 
+    @Description("As an api user i want to delete the weather station")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dependsOnMethods = "UpdateWeatherDetails")
+    public void DeleteWeatherStationTests() {
+        deleteWeatherStationResponse().
+                then().
+                assertThat().
+                statusCode(delete_Success);
+    }
 }

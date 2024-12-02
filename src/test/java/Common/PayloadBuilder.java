@@ -48,17 +48,18 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
-    public static JSONObject updateWeatherStationObject() {
-
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("name",stationName);
-
-        jsonObject.put("Address",address);
-
-
-
-        return jsonObject;
-    }
+//    public static JSONObject updateWeatherStationObject(String wStationName, float wLatitude, float wLongitude,int wAltitude) {
+//
+//        JSONObject jsonObject = new JSONObject();
+//
+//        jsonObject.put("name",wStationName);
+//        jsonObject.put("latitude",wLatitude);
+//        jsonObject.put("longitude",wLongitude);
+//        jsonObject.put("altitude",wAltitude);
+//
+//
+//
+//        return jsonObject;
+//    }
 
 }

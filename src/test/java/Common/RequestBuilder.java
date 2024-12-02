@@ -1,6 +1,7 @@
 package Common;
 
 import io.restassured.response.Response;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
@@ -16,17 +17,27 @@ public class RequestBuilder {
     public static String userID;
     public static String stationID;
 
+    public static String apiKey;
+
+    static {
+        try {
+            apiKey = getApiKey();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Response createUserResponse() {
-        Response response= given().
+        Response response = given().
                 when().
                 body(createEmployeeObject()).
                 contentType(contentType).
                 log().all().
-                post(ReqRes_BaseURL+"/api/users").
+                post(ReqRes_BaseURL + "/api/users").
                 then().
                 log().all().
                 extract().response();
-        userID=response.jsonPath().getString("id");
+        userID = response.jsonPath().getString("id");
 
 
         return response;
@@ -34,12 +45,12 @@ public class RequestBuilder {
 
 
     public static Response updateEmployeeResponse() {
-        return  given().
+        return given().
                 when().
                 body(updateEmployeeObject()).
                 contentType(contentType).
                 log().all().
-                put(ReqRes_BaseURL+"/api/users/"+userID).
+                put(ReqRes_BaseURL + "/api/users/" + userID).
                 then().
                 log().all().
                 extract().response();
@@ -47,12 +58,12 @@ public class RequestBuilder {
 
 
     public static Response partialUpdateEmployeeResponse() {
-        return  given().
+        return given().
                 when().
                 body(partialUpdateEmployeeObject()).
                 contentType(contentType).
                 log().all().
-                patch(ReqRes_BaseURL+"/api/users/"+userID).
+                patch(ReqRes_BaseURL + "/api/users/" + userID).
                 then().
                 log().all().
                 extract().response();
@@ -60,31 +71,59 @@ public class RequestBuilder {
 
 
     public static Response deleteEmployeeResponse() {
-        return  given().
+        return given().
                 when().
                 contentType(contentType).
                 log().all().
-                delete(ReqRes_BaseURL+"/api/users/"+userID).
+                delete(ReqRes_BaseURL + "/api/users/" + userID).
                 then().
                 log().all().
                 extract().response();
     }
-    public static Response weatherStationResponse(String vExternalID, String vStationName, Float vLatitude, Float vLongitude,int vAltitude) throws IOException {
-        String apiKey = getApiKey();
-        Response response =  given().
+
+    public static Response weatherStationResponse(String vExternalID, String vStationName, float vLatitude, float vLongitude, int vAltitude) throws IOException {
+        Response response = given().
                 queryParam("appid", apiKey).
                 when().
-                body(weatherStationObject(vExternalID,vStationName,vLatitude,vLongitude,vAltitude)).
+                body(weatherStationObject(vExternalID, vStationName, vLatitude, vLongitude, vAltitude)).
                 contentType(contentType).
                 log().all().
-                post(WeatherStation_BaseURL+"/data/3.0/stations").
+                post(WeatherStation_BaseURL + "/data/3.0/stations").
                 then().
                 log().all().
                 extract().response();
-        stationID =response.jsonPath().getString("external_id");
+        stationID = response.jsonPath().getString("ID");
 
         return response;
     }
 
+
+    public static Response updateweatherStationResponse( String vExternalID, String vStationName, float vLatitude, float vLongitude,int vAltitude) throws IOException {
+        return given().
+                queryParam("appid", apiKey).
+                when().
+                body(weatherStationObject(vExternalID, vStationName, vLatitude, vLongitude, vAltitude)).
+                contentType(contentType).
+                log().all().
+                put(WeatherStation_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all().
+                extract().response();
+
+
+    }
+
+
+    public static Response deleteWeatherStationResponse() {
+        return given().
+                queryParam("appid", apiKey).
+                when().
+                contentType(contentType).
+                log().all().
+                delete(WeatherStation_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all().
+                extract().response();
+    }
 
 }
